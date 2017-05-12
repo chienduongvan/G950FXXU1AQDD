@@ -1,0 +1,12 @@
+--- arch/arm64/mm/fault.c
++++ arch/arm64/mm/fault.c
+@@ -29,7 +29,9 @@
+ #include <linux/sched.h>
+ #include <linux/highmem.h>
+ #include <linux/perf_event.h>
++#include <linux/preempt.h>
+ 
++#include <asm/bug.h>
+ #include <asm/cpufeature.h>
+ #include <asm/exception.h>
+ #include <asm/debug-monitors.h>
