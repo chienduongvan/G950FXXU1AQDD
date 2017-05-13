@@ -1634,13 +1634,8 @@ static void crypt_dtr(struct dm_target *ti)
 		destroy_workqueue(cc->io_queue);
 
 	if (!cc->hw_fmp) {
-		if (cc->write_thread) {
-			spin_lock_irq(&cc->write_thread_wait.lock);
-			set_bit(DM_CRYPT_EXIT_THREAD, &cc->flags);
-			wake_up_locked(&cc->write_thread_wait);
-			spin_unlock_irq(&cc->write_thread_wait.lock);
+		if (cc->write_thread)
 			kthread_stop(cc->write_thread);
-		}
 
 		if (cc->crypt_queue)
 			destroy_workqueue(cc->crypt_queue);
